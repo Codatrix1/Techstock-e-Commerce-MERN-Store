@@ -1,14 +1,20 @@
-// env variables
+// env variables and express
 import dotenv from "dotenv";
-dotenv.config();
-
-// express
+import connectDB from "./config/connectDB.js";
 import express from "express";
-const app = express();
 
-// import products
+// Rest of the packages and imports
+import colors from "colors";
 import products from "./data/products.js";
 
+// Config and DB stuff
+dotenv.config();
+connectDB();
+
+// invoke express
+const app = express();
+
+// CRUD opeartions
 app.get("/", (req, res) => {
   res.send("<h3>API is running...</h3>");
 });
@@ -27,6 +33,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(
   PORT,
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`.yellow
+      .bold
   )
 );
