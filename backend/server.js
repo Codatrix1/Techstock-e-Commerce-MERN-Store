@@ -5,7 +5,6 @@ import express from "express";
 
 // Rest of the packages and imports
 import colors from "colors";
-import products from "./data/products.js";
 
 // Config and DB stuff
 dotenv.config();
@@ -14,21 +13,26 @@ connectDB();
 // invoke express
 const app = express();
 
-// CRUD opeartions
+// import routers
+import productRouter from "../backend/routes/productRoutes.js";
+
+// Middlewares
+// Body Parser: to access json data from req.body
+app.use(express.json());
+
+// Testing opeartions
 app.get("/", (req, res) => {
   res.send("<h3>API is running...</h3>");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
+//---------------------------------------------
+// Mounting the routers on the default route
+//---------------------------------------------
+app.use("/api/v1/products", productRouter);
 
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.json(product);
-});
-
+//----------
 // Server
+//----------
 const PORT = process.env.PORT || 5000;
 app.listen(
   PORT,
