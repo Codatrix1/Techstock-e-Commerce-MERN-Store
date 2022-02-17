@@ -5,6 +5,7 @@ import express from "express";
 
 // Rest of the packages and imports
 import colors from "colors";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 // Config and DB stuff
 dotenv.config();
@@ -29,6 +30,10 @@ app.get("/", (req, res) => {
 // Mounting the routers on the default route
 //---------------------------------------------
 app.use("/api/v1/products", productRouter);
+
+// error middlewares
+app.use(notFound);
+app.use(errorHandler);
 
 //----------
 // Server

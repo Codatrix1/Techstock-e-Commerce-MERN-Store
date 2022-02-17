@@ -14,7 +14,7 @@ const Homescreen = () => {
       // const result = await axios.get("/api/products");
       // setProducts(result.data);
 
-      const { data } = await axios.get("/api/products");
+      const { data } = await axios.get("/api/v1/products");
       setProducts(data);
     };
 
