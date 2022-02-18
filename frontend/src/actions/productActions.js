@@ -13,6 +13,7 @@ const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     // fetch data using axios and dispatch via payload
+
     const { data } = await axios.get("/api/v1/products");
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
