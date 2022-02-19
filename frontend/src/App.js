@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 // Screens
 import Homescreen from "./screens/Homescreen";
 import Productscreen from "./screens/Productscreen";
+import Cartscreen from "./screens/Cartscreen";
 
 // React Component
 const App = function () {
@@ -22,6 +23,8 @@ const App = function () {
         <Container>
           <Route path="/" exact component={Homescreen} />
           <Route path="/product/:id" component={Productscreen} />
+          {/*INFO: /cart/:id? means that id is otional */}
+          <Route path="/cart/:id?" component={Cartscreen} />
         </Container>
       </main>
 

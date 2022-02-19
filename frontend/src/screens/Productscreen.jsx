@@ -1,6 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from "react-bootstrap";
 
 // Components
 import Rating from "../components/Rating";
@@ -11,16 +19,27 @@ import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
 
+//---------------------
 // React Component
-const Productscreen = ({ match }) => {
-  const dispatch = useDispatch();
+//---------------------
+const Productscreen = ({ match, history }) => {
+  // React component level state: Add to cart
+  const [qty, setQty] = useState(0);
 
+  // React-Redux app level state: Single Product Details
+  const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
+
+  // Add to Cart
+  const addToCartHandler = () => {
+    // props.history.push REDIRECTS
+    history.push(`/cart/${match.params.id}?quantity=${qty}`);
+  };
 
   return (
     <React.Fragment>
@@ -83,8 +102,35 @@ const Productscreen = ({ match }) => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+                {/* Add to cart function: with Component Level State*/}
+                {/* Start */}
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Quantity</Col>
+                      <Col>
+                        <Form.Control
+                          as="select"
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {/* Explaination: Result for array: [0,1,2,3,4... and so on]  and then we are mapping through*/}
+                          {[...Array(product.countInStock).keys()].map(
+                            (index) => (
+                              <option key={index + 1} value={index + 1}>
+                                {index + 1}
+                              </option>
+                            )
+                          )}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+
                 <ListGroup.Item>
                   <Button
+                    onClick={addToCartHandler}
                     className="btn-block"
                     type="button"
                     disabled={product.countInStock === 0}
@@ -92,6 +138,7 @@ const Productscreen = ({ match }) => {
                     Add To Cart
                   </Button>
                 </ListGroup.Item>
+                {/* Finish */}
               </ListGroup>
             </Card>
           </Col>

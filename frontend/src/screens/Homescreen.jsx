@@ -14,8 +14,8 @@ import { listProducts } from "../actions/productActions";
 // Main React Component
 //--------------------------
 const Homescreen = () => {
+  // React-Redux app level state: All Products List
   const dispatch = useDispatch();
-
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
