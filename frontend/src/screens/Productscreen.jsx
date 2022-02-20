@@ -24,7 +24,7 @@ import { listProductDetails } from "../actions/productActions";
 //---------------------
 const Productscreen = ({ match, history }) => {
   // React component level state: Add to cart
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   // React-Redux app level state: Single Product Details
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const Productscreen = ({ match, history }) => {
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
-                          {/* Explaination: Result for array: [0,1,2,3,4... and so on]  and then we are mapping through*/}
+                          {/* Explaination: Result for array: [0,1,2,3,4... and so on]  and then we are mapping through to get [ 1,2,3,4,5... and so on] */}
                           {[...Array(product.countInStock).keys()].map(
                             (index) => (
                               <option key={index + 1} value={index + 1}>

@@ -27,6 +27,7 @@ const productListReducer = (state = { products: [] }, action) => {
     return { loading: false, error: action.payload };
   }
 
+  // default return
   return state;
 };
 
@@ -49,6 +50,7 @@ const productDetailsReducer = (
     return { loading: false, error: action.payload };
   }
 
+  // default return
   return state;
 };
 
