@@ -11,7 +11,7 @@ const OrderSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // Child Referencing:  Refers to all the items ordered by a specific "User" as an Array
+    // Child Referencing:  Refers to all the products ordered by a specific "User" as an Array
     orderItems: [
       {
         name: { type: String, required: true },

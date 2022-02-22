@@ -18,6 +18,7 @@ import Message from "../components/Message";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
+// import { addToCart } from "../actions/cartActions";
 
 //---------------------
 // React Component
@@ -40,6 +41,14 @@ const Productscreen = ({ match, history }) => {
     // props.history.push REDIRECTS
     history.push(`/cart/${match.params.id}?quantity=${qty}`);
   };
+
+  // // // Add to Cart
+  // const addToCartHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(addToCart(product._id, qty));
+  //   history.push(`/cart`);
+  //   /* props.history.push(`/cart/${product._id}?qty=${qty}`) */
+  // };
 
   return (
     <React.Fragment>
